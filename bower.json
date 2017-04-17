@@ -1,7 +1,7 @@
 {
   "name": "aggregation-display",
   "description": "A Polymer Element showing a bar chart with a header, loading spinner, and Show More button.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
   "keywords": [

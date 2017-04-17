@@ -174,6 +174,21 @@ limitations under the License.
         }]);
       });
 
+      test('changing limit also changes _barChartData', function() {
+        element.limit = 1;
+        expect(element._barChartData).to.be.an('Array');
+        expect(element._barChartData).to.deep.equal([{
+          count: 4,
+          icon: undefined,
+          id: 1,
+          link: undefined,
+          max: 4,
+          select: false,
+          styleClass: undefined,
+          text: 'textA'
+        }]);
+      });
+
       test('does show a horizontal-bar-chart element', function() {
         expect(element.$$('horizontal-bar-chart')).to.exist;
         expect(element.$$('horizontal-bar-chart').data).to.deep.equal([{
@@ -214,6 +229,14 @@ limitations under the License.
 
       test('does not show a header', function() {
         expect(element.$$('#header')).to.not.exist;
+      });
+
+      test('does show a header if headerDataName exists', function(done) {
+        element.headerDataName = 'My Data';
+        flush(function() {
+          expect(element.$$('#header')).to.exist;
+          done();
+        });
       });
 
       test('_getBarChartStyleClass does return correctly', function() {
