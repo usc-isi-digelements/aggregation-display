@@ -1,15 +1,16 @@
 {
   "name": "aggregation-display",
   "description": "A Polymer Element showing a bar chart with a header, loading spinner, and Show More button.",
-  "version": "1.0.5",
-  "authors": ["Next Century Corporation"],
+  "version": "1.0.6",
+  "authors": [
+    "Next Century Corporation"
+  ],
   "license": "Apache-2.0",
   "keywords": [
     "web-component",
     "polymer"
   ],
   "main": "aggregation-display.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/DigElements/aggregation-display/",
   "ignore": [
     "/.*",
@@ -27,5 +28,8 @@
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
     "web-component-tester": "^5.0.0"
+  },
+  "resolutions": {
+    "lodash": "~4.17.2"
   }
 }
