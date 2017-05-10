@@ -106,7 +106,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
           <div class="layout horizontal end flex-2 add-margin-right">
             <div class="text flex" title$="[[headerDataName]]">[[headerDataName]]</div>
             <template is="dom-if" if="[[_barChartData.length]]">
-              <div class="text flex align-right" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]">
+              <div class="text flex-2 align-right" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]">
                 [[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]
               </div>
             </template>
