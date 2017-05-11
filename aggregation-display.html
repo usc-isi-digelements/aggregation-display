@@ -147,6 +147,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
             index-name="[[indexName]]"
             index-types="[[indexTypes]]"
             query-field="[[queryField]]"
+            query="[[query]]"
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
             data="[[_barChartData]]"
@@ -383,7 +384,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
          * (Optional)
          *
          * Whether to show a double-bar-chart element with counts of other results not included in the item counts.  Runs an elasticsearch query for each item.
-         * Requires the properties:  client, indexName, indexTypes, queryField
+         * Requires the properties:  `client`, `indexName`, `indexTypes`, and `query` OR `queryField`
          *
          * @type {Boolean}
          * @default false
@@ -429,7 +430,18 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
         /**
          * (Optional)
          *
-         * The elasticsearch query field.  Required if showDoubleBarChart is true.
+         * The elasticsearch query object.  Either `query` or `queryField` is required if showDoubleBarChart is true.
+         *
+         * @type {Object}
+         */
+        query: {
+          type: Object
+        },
+
+        /**
+         * (Optional)
+         *
+         * The elasticsearch query field.  Either `query` or `queryField` is required if showDoubleBarChart is true.
          *
          * @type {String}
          */
