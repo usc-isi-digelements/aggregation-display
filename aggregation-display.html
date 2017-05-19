@@ -136,6 +136,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
           <horizontal-bar-chart
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
+            target="[[target]]"
             data="[[_barChartData]]"
             selected-ids="{{selectedIds}}">
           </horizontal-bar-chart>
@@ -150,6 +151,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
             query="[[query]]"
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
+            target="[[target]]"
             data="[[_barChartData]]"
             max-other-count="{{_maxOtherCount}}"
             selected-ids="{{selectedIds}}">
@@ -392,6 +394,19 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
         showDoubleBarChart: {
           type: Boolean,
           value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * The target page of the links.
+         *
+         * @type {String}
+         * @default '_self'
+         */
+        target: {
+          type: String,
+          value: '_self'
         },
 
         /**

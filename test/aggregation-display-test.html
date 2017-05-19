@@ -69,6 +69,7 @@ limitations under the License.
         expect(element.linkProperty).to.equal('link');
         expect(element.styleClassProperty).to.equal('styleClass');
         expect(element.textProperty).to.equal('text');
+        expect(element.target).to.equal('_self');
         expect(element.limit).to.equal(10);
         expect(element.headerCountsName).to.equal('');
         expect(element.headerDataName).to.equal('');
@@ -213,6 +214,7 @@ limitations under the License.
         expect(element.$$('horizontal-bar-chart').checkboxName).to.equal('Filter');
         expect(element.$$('horizontal-bar-chart').selectedIds).to.deep.equal([]);
         expect(element.$$('horizontal-bar-chart').showCheckboxes).to.be.true;
+        expect(element.$$('horizontal-bar-chart').target).to.equal('_self');
       });
 
       test('does not show a double-bar-chart element', function() {
@@ -340,6 +342,7 @@ limitations under the License.
         expect(element.linkProperty).to.equal('webURL');
         expect(element.styleClassProperty).to.equal('cssClass');
         expect(element.textProperty).to.equal('name');
+        expect(element.target).to.equal('_self');
         expect(element.limit).to.equal(2);
         expect(element.headerCountsName).to.equal('My Counts');
         expect(element.headerDataName).to.equal('My Data');
@@ -487,6 +490,7 @@ limitations under the License.
         expect(element.$$('horizontal-bar-chart').checkboxName).to.equal('Checkbox');
         expect(element.$$('horizontal-bar-chart').selectedIds).to.deep.equal([]);
         expect(element.$$('horizontal-bar-chart').showCheckboxes).to.be.true;
+        expect(element.$$('horizontal-bar-chart').target).to.equal('_self');
       });
 
       test('does show a horizontal-bar-chart header', function() {
@@ -599,6 +603,7 @@ limitations under the License.
         expect(element.linkProperty).to.equal('link');
         expect(element.styleClassProperty).to.equal('styleClass');
         expect(element.textProperty).to.equal('text');
+        expect(element.target).to.equal('_self');
         expect(element.limit).to.equal(10);
         expect(element.headerCountsName).to.equal('');
         expect(element.headerDataName).to.equal('My Data');
@@ -638,6 +643,7 @@ limitations under the License.
         expect(element.$$('double-bar-chart').maxOtherCount).to.equal(0);
         expect(element.$$('double-bar-chart').selectedIds).to.deep.equal([]);
         expect(element.$$('double-bar-chart').showCheckboxes).to.be.true;
+        expect(element.$$('double-bar-chart').target).to.equal('_self');
       });
 
       test('does show a double-bar-chart header', function() {
