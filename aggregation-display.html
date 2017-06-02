@@ -76,6 +76,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
         color: var(--secondary-text-color);
         font-size: 14px;
         line-height: 20px;
+        min-width: 25px;
         text-transform: uppercase;
 
         /* Needed to fix flexbox layout issues in newer browsers. */
@@ -98,15 +99,15 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
         <template is="dom-if" if="[[!showDoubleBarChart]]">
           <div class="text flex" title$="[[headerDataName]]">[[headerDataName]]</div>
           <template is="dom-if" if="[[_barChartData.length]]">
-            <div class="text flex align-right" title$="[[headerCountsName]]">[[headerCountsName]]</div>
+            <div class="text align-right" title$="[[headerCountsName]]">[[headerCountsName]]</div>
           </template>
         </template>
 
         <template is="dom-if" if="[[showDoubleBarChart]]">
           <div class="layout horizontal end flex-2 add-margin-right">
-            <div class="text flex" title$="[[headerDataName]]">[[headerDataName]]</div>
+            <div class="text" title$="[[headerDataName]]">[[headerDataName]]</div>
             <template is="dom-if" if="[[_barChartData.length]]">
-              <div class="text flex-2 align-right" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]">
+              <div class="text flex align-right" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]">
                 [[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]
               </div>
             </template>
