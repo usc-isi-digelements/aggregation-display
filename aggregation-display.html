@@ -139,6 +139,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
             checkbox-name="[[checkboxName]]"
             target="[[target]]"
             data="[[_barChartData]]"
+            selected-ids-property="[[selectedIdsProperty]]"
             selected-ids="{{selectedIds}}">
           </horizontal-bar-chart>
         </template>
@@ -155,6 +156,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
             target="[[target]]"
             data="[[_barChartData]]"
             max-other-count="{{_maxOtherCount}}"
+            selected-ids-property="[[selectedIdsProperty]]"
             selected-ids="{{selectedIds}}">
           </double-bar-chart>
         </template>
@@ -479,19 +481,30 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
         },
 
         /**
-         * (Output)
+         * (Optional|Output)
          *
-         * The selected string IDs on which to filter.
+         * The selected string IDs on which to filter.  Either a list of an object containing a list at its `selectedIdsProperty` property.
          *
-         * @type {Array}
+         * @type {Array|Object}
          * @default []
          */
         selectedIds: {
           notify: true,
-          type: Array,
+          type: Object,
           value: function() {
             return [];
           }
+        },
+
+        /**
+         * (Optional)
+         *
+         * The property in the `selectedIds` object containing the list of selected string IDs.  If undefined, assumes that `selectedIds` itself is a list.
+         *
+         * @type {String}
+         */
+        selectedIdsProperty: {
+          type: String
         },
 
         /**
@@ -560,6 +573,11 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
           return item[self.countProperty];
         })) || 0;
 
+        var selectedIds = this.selectedIds || [];
+        if(this.selectedIds && this.selectedIdsProperty) {
+          selectedIds = this.selectedIds[this.selectedIdsProperty] || [];
+        }
+
         data.forEach(function(item) {
           aggregationDisplayData.push({
             count: item[self.countProperty],
@@ -567,7 +585,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
             id: item[self.idProperty],
             link: item[self.linkProperty],
             max: max,
-            select: (self.selectedIds.indexOf(item[self.idProperty]) >= 0),
+            select: (selectedIds.indexOf(item[self.idProperty]) >= 0),
             styleClass: item[self.styleClassProperty],
             text: item[self.textProperty]
           });
