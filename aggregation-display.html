@@ -567,6 +567,9 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
        * @private
        */
       _createAggregationDisplayData: function(data) {
+        if(!data){
+          return;
+        }
         var self = this;
         var aggregationDisplayData = [];
 
@@ -658,6 +661,9 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
        * @private
        */
       _updateBarChartData: function() {
+        if(!this._aggregationDisplayData || !this.limit) {
+          return;
+        }
         this.set('_barChartData', []);
         this.set('_maxOtherCount', 0);
         var limit = (this.limit > 0 ? Math.min(this._aggregationDisplayData.length, this.limit) : this._aggregationDisplayData.length);
