@@ -1,7 +1,7 @@
 {
   "name": "aggregation-display",
   "description": "A Polymer Element showing a bar chart with a header, loading spinner, and Show More button.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "authors": [
     "Next Century Corporation"
   ],
@@ -19,7 +19,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.2",
     "button-action": "DigElements/button-action#2.0.0",
-    "double-bar-chart": "DigElements/double-bar-chart#2.0.0",
+    "double-bar-chart": "DigElements/double-bar-chart#2.1.0",
     "horizontal-bar-chart": "DigElements/horizontal-bar-chart#2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0.0",
     "loading-spinner": "DigElements/loading-spinner#~2.0.0",
