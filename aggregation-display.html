@@ -661,7 +661,7 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
        * @private
        */
       _updateBarChartData: function() {
-        if(!this._aggregationDisplayData || !this.limit) {
+        if(!this._aggregationDisplayData) {
           return;
         }
         this.set('_barChartData', []);
