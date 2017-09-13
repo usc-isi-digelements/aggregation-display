@@ -35,6 +35,23 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
 </aggregation-display>
 ```
 
+### Styling
+
+`<aggregation-display>` provides the following custom properties and mixins for styling:
+
+Custom property                                      | Description                                                         | Default
+-----------------------------------------------------|---------------------------------------------------------------------|--------
+`--aggregation-display-bar-color`                    | The color of the single or left bars.                               | --paper-grey-300
+`--aggregation-display-bar-count-color`              | The color of the single or left count labels.                       | --paper-grey-900
+`--aggregation-display-bar-height`                   | The height of the single or left bars.                              | 20px
+`--aggregation-display-bar-title-color`              | The color of the single or left title labels.                       | --paper-grey-900
+`--aggregation-display-bar-title-hover-color`        | The color of the single or left title labels on hover (if a link).  | --paper-grey-600
+`--aggregation-display-second-bar-color`             | The color of the right (second) bars.                               | --paper-grey-300
+`--aggregation-display-second-bar-count-color`       | The color of the right (second) count labels.                       | --paper-grey-900
+`--aggregation-display-second-bar-height`            | The height of the right (second) bars.                              | 20px
+`--aggregation-display-second-bar-title-color`       | The color of the right (second) title labels.                       | --paper-grey-900
+`--aggregation-display-second-bar-title-hover-color` | The color of the right (second) title labels on hover (if a link).  | --paper-grey-600
+
 @demo demo/index.html
 -->
 
@@ -92,6 +109,27 @@ A Polymer Element showing a bar chart with a header, loading spinner, and Show M
 
       .align-right {
         text-align: right;
+      }
+
+      horizontal-bar-chart {
+        --horizontal-bar-chart-bar-color: var(--aggregation-display-bar-color, var(--paper-grey-300));
+        --horizontal-bar-chart-bar-count-color: var(--aggregation-display-bar-count-color, var(--paper-grey-900));
+        --horizontal-bar-chart-bar-height: var(--aggregation-display-bar-height, 20px);
+        --horizontal-bar-chart-bar-title-color: var(--aggregation-display-bar-title-color, var(--paper-grey-900));
+        --horizontal-bar-chart-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-grey-600));
+      }
+
+      double-bar-chart {
+        --double-bar-chart-left-bar-color: var(--aggregation-display-bar-color, var(--paper-grey-300));
+        --double-bar-chart-left-bar-count-color: var(--aggregation-display-bar-count-color, var(--paper-grey-900));
+        --double-bar-chart-left-bar-height: var(--aggregation-display-bar-height, 20px);
+        --double-bar-chart-left-bar-title-color: var(--aggregation-display-bar-title-color, var(--paper-grey-900));
+        --double-bar-chart-left-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-grey-600));
+        --double-bar-chart-right-bar-color: var(--aggregation-display-second-bar-color, var(--paper-grey-300));
+        --double-bar-chart-right-bar-count-color: var(--aggregation-display-second-bar-count-color, var(--paper-grey-900));
+        --double-bar-chart-right-bar-height: var(--aggregation-display-second-bar-height, 20px);
+        --double-bar-chart-right-bar-title-color: var(--aggregation-display-second-bar-title-color, var(--paper-grey-900));
+        --double-bar-chart-right-bar-title-hover-color: var(--aggregation-display-second-bar-title-hover-color, var(--paper-grey-600));
       }
     </style>
 
