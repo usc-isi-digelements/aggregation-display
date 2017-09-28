@@ -647,7 +647,10 @@ Custom property                                      | Description              
         var self = this;
         return {
           onClick: function() {
-            var barChartData = self._barChartData;
+            // Use the map function to create a new array (needed to notify the data observers in the bar charts).
+            var barChartData = self._barChartData.map(function(item) {
+              return item;
+            });
             self.set('_barChartData', []);
             for(var i = self.limit; i < self._aggregationDisplayData.length; ++i) {
               barChartData.push(self._aggregationDisplayData[i]);
