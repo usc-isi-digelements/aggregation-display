@@ -286,6 +286,19 @@ Custom property                                      | Description              
         /**
          * (Optional)
          *
+         * The image source property in the each item.
+         *
+         * @type {String}
+         * @default 'source'
+         */
+        sourceProperty: {
+          type: String,
+          value: 'source'
+        },
+
+        /**
+         * (Optional)
+         *
          * The style class property in the each item.
          *
          * @type {String}
@@ -629,6 +642,7 @@ Custom property                                      | Description              
             link: item[self.linkProperty],
             max: max,
             select: (selectedIds.indexOf(item[self.idProperty]) >= 0),
+            source: item[self.sourceProperty],
             styleClass: item[self.styleClassProperty],
             text: item[self.textProperty]
           });
