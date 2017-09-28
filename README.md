@@ -22,6 +22,7 @@ Custom property                                      | Description              
 `--aggregation-display-bar-height`                   | The height of the single or left bars.                              | 20px
 `--aggregation-display-bar-title-color`              | The color of the single or left title labels.                       | --paper-grey-900
 `--aggregation-display-bar-title-hover-color`        | The color of the single or left title labels on hover (if a link).  | --paper-grey-600
+`--aggregation-display-max-height`                   | The max height of the bar chart.                                    | 280px
 `--aggregation-display-second-bar-color`             | The color of the right (second) bars.                               | --paper-grey-300
 `--aggregation-display-second-bar-count-color`       | The color of the right (second) count labels.                       | --paper-grey-900
 `--aggregation-display-second-bar-height`            | The height of the right (second) bars.                              | 20px

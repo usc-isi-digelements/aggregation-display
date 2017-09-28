@@ -78,7 +78,6 @@ limitations under the License.
         expect(element.showDoubleBarChart).to.be.false;
         expect(element.errorMessage).to.equal('');
         expect(element.loading).to.be.false;
-        expect(element.small).to.be.false;
         expect(element.selectedIds).to.deep.equal([]);
         expect(element._maxOtherCount).to.deep.equal(0);
         expect(element._showMore).to.be.false;
@@ -250,32 +249,6 @@ limitations under the License.
         });
       });
 
-      test('_getBarChartStyleClass does return correctly', function() {
-        expect(element._getBarChartStyleClass).to.be.a('Function');
-        expect(element._getBarChartStyleClass(false)).to.equal('');
-        expect(element._getBarChartStyleClass(true)).to.equal('small');
-      });
-
-      test('_getHeaderStyleClass does return correctly if small=false', function() {
-        expect(element._getHeaderStyleClass).to.be.a('Function');
-        expect(element._getHeaderStyleClass(0, false)).to.equal('');
-        expect(element._getHeaderStyleClass(1, false)).to.equal('');
-        expect(element._getHeaderStyleClass(2, false)).to.equal('');
-        expect(element._getHeaderStyleClass(20, false)).to.equal('');
-        expect(element._getHeaderStyleClass(21, false)).to.equal('scroll-margin');
-        expect(element._getHeaderStyleClass(99, false)).to.equal('scroll-margin');
-      });
-
-      test('_getHeaderStyleClass does return correctly if small=true', function() {
-        expect(element._getHeaderStyleClass).to.be.a('Function');
-        expect(element._getHeaderStyleClass(0, true)).to.equal('');
-        expect(element._getHeaderStyleClass(1, true)).to.equal('');
-        expect(element._getHeaderStyleClass(2, true)).to.equal('');
-        expect(element._getHeaderStyleClass(11, true)).to.equal('');
-        expect(element._getHeaderStyleClass(12, true)).to.equal('scroll-margin');
-        expect(element._getHeaderStyleClass(99, true)).to.equal('scroll-margin');
-      });
-
       test('_getCountsHeader does return correctly', function() {
         expect(element._getCountsHeader).to.be.a('Function');
         expect(element._getCountsHeader('Co-occurring', '', '')).to.equal('Co-occurring');
@@ -300,7 +273,6 @@ limitations under the License.
         element.styleClassProperty = 'cssClass';
         element.textProperty = 'name';
         element.limit = 2;
-        element.small = true;
         element.headerCountsName = 'My Counts';
         element.headerDataName = 'My Data';
         element.headerEntityName = 'My Entity';
@@ -363,7 +335,6 @@ limitations under the License.
         expect(element.headerCountsName).to.equal('My Counts');
         expect(element.headerDataName).to.equal('My Data');
         expect(element.headerEntityName).to.equal('My Entity');
-        expect(element.small).to.be.true;
         expect(element.errorMessage).to.equal('');
         expect(element.loading).to.be.false;
         expect(element.showCheckboxes).to.be.true;
@@ -700,7 +671,6 @@ limitations under the License.
         expect(element.showDoubleBarChart).to.be.true;
         expect(element.errorMessage).to.equal('');
         expect(element.loading).to.be.false;
-        expect(element.small).to.be.false;
         expect(element.selectedIds).to.deep.equal([]);
         expect(element._maxOtherCount).to.deep.equal(0);
         expect(element._showMore).to.be.false;

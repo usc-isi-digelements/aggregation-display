@@ -47,6 +47,7 @@ Custom property                                      | Description              
 `--aggregation-display-bar-height`                   | The height of the single or left bars.                              | 20px
 `--aggregation-display-bar-title-color`              | The color of the single or left title labels.                       | --paper-grey-900
 `--aggregation-display-bar-title-hover-color`        | The color of the single or left title labels on hover (if a link).  | --paper-grey-600
+`--aggregation-display-max-height`                   | The max height of the bar chart.                                    | 280px
 `--aggregation-display-second-bar-color`             | The color of the right (second) bars.                               | --paper-grey-300
 `--aggregation-display-second-bar-count-color`       | The color of the right (second) count labels.                       | --paper-grey-900
 `--aggregation-display-second-bar-height`            | The height of the right (second) bars.                              | 20px
@@ -66,9 +67,9 @@ Custom property                                      | Description              
       }
 
       .data {
-        overflow: auto;
-        /* Max Height = Height of 20 Items */
-        max-height: 480px;
+        overflow-y: overlay;
+        /* Max Height = Height of 10 Items + Height of Show More Button */
+        max-height: var(--aggregation-display-max-height, 280px);
         /* Must add bottom padding otherwise the scrollbar will be displayed due to the paper-checkbox ripple element. */
         padding-bottom: 15px;
       }
@@ -83,12 +84,7 @@ Custom property                                      | Description              
 
       .scroll-margin {
         /* Add right margin to the header equal to the width of a scrollbar. */
-        margin-right: 15px;
-      }
-
-      .small {
-        /* Max Height = Height of 10 Items + Height of Show More Button */
-        max-height: 280px;
+        margin-right: 20px;
       }
 
       .text {
@@ -135,7 +131,7 @@ Custom property                                      | Description              
     </style>
 
     <template is="dom-if" if="[[headerDataName]]">
-      <div id="header" class$="layout horizontal end [[_getHeaderStyleClass(_barChartData.length, small)]]">
+      <div id="header" class="layout horizontal end scroll-margin">
         <template is="dom-if" if="[[!showDoubleBarChart]]">
           <div class="text flex" title$="[[headerDataName]]">[[headerDataName]]</div>
           <template is="dom-if" if="[[_barChartData.length]]">
@@ -172,9 +168,10 @@ Custom property                                      | Description              
     </status-text>
 
     <template is="dom-if" if="[[_barChartData.length]]">
-      <div class$="data [[_getBarChartStyleClass(small)]]">
+      <div class="data">
         <template is="dom-if" if="[[!showDoubleBarChart]]">
           <horizontal-bar-chart
+            class="scroll-margin"
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
             target="[[target]]"
@@ -186,6 +183,7 @@ Custom property                                      | Description              
 
         <template is="dom-if" if="[[showDoubleBarChart]]">
           <double-bar-chart
+            class="scroll-margin"
             client="[[client]]"
             index-name="[[indexName]]"
             index-types="[[indexTypes]]"
@@ -521,19 +519,6 @@ Custom property                                      | Description              
         },
 
         /**
-         * (Optional)
-         *
-         * Whether this component should be shown as its smaller version.
-         *
-         * @type {Boolean}
-         * @default false
-         */
-        small: {
-          type: Boolean,
-          value: false
-        },
-
-        /**
          * (Optional|Output)
          *
          * The list of selected string IDs from the data to filter.  Either a list of an object containing a list at its `selectedIdsProperty` property.
@@ -676,17 +661,6 @@ Custom property                                      | Description              
       },
 
       /**
-       * Returns the style class for the bar chart.
-       *
-       * @param {Boolean} small
-       * @return {String}
-       * @private
-       */
-      _getBarChartStyleClass: function(small) {
-        return small ? 'small' : '';
-      },
-
-      /**
        * Returns the count header using the given text.
        *
        * @param {String} text
@@ -697,18 +671,6 @@ Custom property                                      | Description              
        */
       _getCountsHeader: function(text, headerCountsName, headerEntityName) {
         return (headerCountsName ? headerCountsName + ' ' : '') + text + (headerEntityName ? ' With ' + headerEntityName : '');
-      },
-
-      /**
-       * Returns the style class for the header.
-       *
-       * @param {Number} length
-       * @param {Boolean} small
-       * @return {String}
-       * @private
-       */
-      _getHeaderStyleClass: function(length, small) {
-        return length > (small ? 11 : 20) ? 'scroll-margin' : '';
       },
 
       /**
