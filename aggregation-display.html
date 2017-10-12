@@ -172,6 +172,7 @@ Custom property                                      | Description              
         <template is="dom-if" if="[[!showDoubleBarChart]]">
           <horizontal-bar-chart
             class="scroll-margin"
+            image-style-class="[[imageStyleClass]]"
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
             target="[[target]]"
@@ -184,6 +185,7 @@ Custom property                                      | Description              
         <template is="dom-if" if="[[showDoubleBarChart]]">
           <double-bar-chart
             class="scroll-margin"
+            image-style-class="[[imageStyleClass]]"
             client="[[client]]"
             index-name="[[indexName]]"
             index-types="[[indexTypes]]"
@@ -382,6 +384,19 @@ Custom property                                      | Description              
         hideShowMore: {
           type: Boolean,
           value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * The style class for all the images in the display.
+         *
+         * @type {String}
+         * @default ''
+         */
+        imageStyleClass: {
+          type: String,
+          value: ''
         },
 
         /**
