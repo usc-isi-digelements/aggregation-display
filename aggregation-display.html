@@ -19,7 +19,6 @@ limitations under the License.
 <link rel="import" href="../double-bar-chart/double-bar-chart.html">
 <link rel="import" href="../horizontal-bar-chart/horizontal-bar-chart.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../loading-spinner/loading-spinner.html">
 <link rel="import" href="../lodash-import/lodash.html">
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../status-text/status-text.html">
@@ -70,8 +69,6 @@ Custom property                                      | Description              
         overflow-y: overlay;
         /* Max Height = Height of 10 Items + Height of Show More Button */
         max-height: var(--aggregation-display-max-height, 280px);
-        /* Must add bottom padding otherwise the scrollbar will be displayed due to the paper-checkbox ripple element. */
-        padding-bottom: 15px;
       }
 
       .add-margin-left {
@@ -160,7 +157,7 @@ Custom property                                      | Description              
       </div>
     </template>
 
-    <status-text
+    <status-text class="scroll-margin"
       count="[[_barChartData.length]]"
       error="[[errorMessage]]"
       loading="[[loading]]"
@@ -202,8 +199,6 @@ Custom property                                      | Description              
         </template>
       </div>
     </template>
-
-    <loading-spinner show="[[loading]]"></loading-spinner>
 
     <template is="dom-if" if="[[_showMore]]">
       <div class="layout horizontal center-justified">
