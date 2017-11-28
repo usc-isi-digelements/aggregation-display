@@ -238,25 +238,29 @@ limitations under the License.
       });
 
       test('does not show a header', function() {
-        expect(element.$$('#header')).to.not.exist;
+        expect(element.$$('.header')).to.not.exist;
       });
 
       test('does show a header if headerDataName exists', function(done) {
         element.headerDataName = 'My Data';
         flush(function() {
-          expect(element.$$('#header')).to.exist;
+          expect(element.$$('.header')).to.exist;
           done();
         });
       });
 
       test('_getCountsHeader does return correctly', function() {
         expect(element._getCountsHeader).to.be.a('Function');
-        expect(element._getCountsHeader('Co-occurring', '', '')).to.equal('Co-occurring');
-        expect(element._getCountsHeader('Co-occurring', 'Foo', '')).to.equal('Foo Co-occurring');
-        expect(element._getCountsHeader('Co-occurring', '', 'Bar')).to.equal('Co-occurring With Bar');
-        expect(element._getCountsHeader('Co-occurring', 'Foo', 'Bar')).to.equal('Foo Co-occurring With Bar');
-        expect(element._getCountsHeader('Not Co-occurring', '')).to.equal('Not Co-occurring');
-        expect(element._getCountsHeader('Not Co-occurring', 'Foo')).to.equal('Foo Not Co-occurring');
+        expect(element._getCountsHeader('Co-occurring', '', '', '')).to.equal('Co-occurring');
+        expect(element._getCountsHeader('Co-occurring', 'Data', '', '')).to.equal('Data Co-occurring');
+        expect(element._getCountsHeader('Co-occurring', '', 'Entity', '')).to.equal('Co-occurring with Entity');
+        expect(element._getCountsHeader('Co-occurring', '', '', 'Extractions')).to.equal('Extractions Co-occurring');
+        expect(element._getCountsHeader('Co-occurring', 'Data', 'Entity', '')).to.equal('Data Co-occurring with Entity');
+        expect(element._getCountsHeader('Co-occurring', 'Data', '', 'Extractions')).to.equal('Extractions in Data Co-occurring');
+        expect(element._getCountsHeader('Co-occurring', '', 'Entity', 'Extractions')).to.equal('Extractions Co-occurring with Entity');
+        expect(element._getCountsHeader('Co-occurring', 'Data', 'Entity', 'Extractions')).to.equal('Extractions in Data Co-occurring with Entity');
+        expect(element._getCountsHeader('Not Co-occurring', '', '', '')).to.equal('Not Co-occurring');
+        expect(element._getCountsHeader('Not Co-occurring', 'Data', '', '')).to.equal('Data Not Co-occurring');
       });
     });
 
@@ -495,7 +499,7 @@ limitations under the License.
       });
 
       test('does show a horizontal-bar-chart header', function() {
-        expect(element.$$('#header')).to.exist;
+        expect(element.$$('.header')).to.exist;
       });
 
       test('does not show a double-bar-chart element', function() {
@@ -707,7 +711,7 @@ limitations under the License.
       });
 
       test('does show a double-bar-chart header', function() {
-        expect(element.$$('#header')).to.exist;
+        expect(element.$$('.header')).to.exist;
       });
 
       test('does not show a horizontal-bar-chart element', function() {

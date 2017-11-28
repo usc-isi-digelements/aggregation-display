@@ -66,9 +66,15 @@ Custom property                                      | Description              
       }
 
       .data {
-        overflow-y: overlay;
+        overflow-y: scroll;
+        padding-right: 5px;
         /* Max Height = Height of 10 Items + Height of Show More Button */
         max-height: var(--aggregation-display-max-height, 280px);
+      }
+
+      .data.hide-scroll {
+        overflow-y: hidden;
+        padding-right: 0;
       }
 
       .add-margin-left {
@@ -77,11 +83,6 @@ Custom property                                      | Description              
 
       .add-margin-right {
         margin-right: 5px;
-      }
-
-      .scroll-margin {
-        /* Add right margin to the header equal to the width of a scrollbar. */
-        margin-right: 20px;
       }
 
       .text {
@@ -99,10 +100,6 @@ Custom property                                      | Description              
         word-break: break-word;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-      }
-
-      .align-right {
-        text-align: right;
       }
 
       horizontal-bar-chart {
@@ -125,30 +122,30 @@ Custom property                                      | Description              
         --double-bar-chart-right-bar-title-color: var(--aggregation-display-second-bar-title-color, var(--paper-grey-900));
         --double-bar-chart-right-bar-title-hover-color: var(--aggregation-display-second-bar-title-hover-color, var(--paper-grey-600));
       }
+
+      .header {
+        margin-right: 20px;
+      }
+
+      .header.hide-scroll {
+        margin-right: 0;
+      }
     </style>
 
     <template is="dom-if" if="[[headerDataName]]">
-      <div id="header" class="layout horizontal end scroll-margin">
-        <template is="dom-if" if="[[!showDoubleBarChart]]">
-          <div class="text flex" title$="[[headerDataName]]">[[headerDataName]]</div>
+      <div class$="layout horizontal header [[_shouldHideScroll(hideScroll)]]">
+        <div class="layout horizontal end flex-2 add-margin-right">
           <template is="dom-if" if="[[_barChartData.length]]">
-            <div class="text align-right" title$="[[headerCountsName]]">[[headerCountsName]]</div>
+            <div class="text flex" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName, headerDataName)]]">
+              [[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName, headerDataName)]]
+            </div>
           </template>
-        </template>
+        </div>
 
         <template is="dom-if" if="[[showDoubleBarChart]]">
-          <div class="layout horizontal end flex-2 add-margin-right">
-            <div class="text" title$="[[headerDataName]]">[[headerDataName]]</div>
-            <template is="dom-if" if="[[_barChartData.length]]">
-              <div class="text flex align-right" title$="[[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]">
-                [[_getCountsHeader('Co-occurring', headerCountsName, headerEntityName)]]
-              </div>
-            </template>
-          </div>
-
           <div class="layout horizontal end flex-1 add-margin-left">
             <template is="dom-if" if="[[_barChartData.length]]">
-              <div class="text flex align-right" title$="[[_getCountsHeader('Not Co-occurring', headerCountsName)]]">
+              <div class="text flex" title$="[[_getCountsHeader('Not Co-occurring', headerCountsName)]]">
                 [[_getCountsHeader('Not Co-occurring', headerCountsName)]]
               </div>
             </template>
@@ -157,7 +154,7 @@ Custom property                                      | Description              
       </div>
     </template>
 
-    <status-text class="scroll-margin"
+    <status-text
       count="[[_barChartData.length]]"
       error="[[errorMessage]]"
       loading="[[loading]]"
@@ -165,10 +162,9 @@ Custom property                                      | Description              
     </status-text>
 
     <template is="dom-if" if="[[_barChartData.length]]">
-      <div class="data">
+      <div class$="data [[_shouldHideScroll(hideScroll)]]">
         <template is="dom-if" if="[[!showDoubleBarChart]]">
           <horizontal-bar-chart
-            class="scroll-margin"
             image-style-class="[[imageStyleClass]]"
             show-checkboxes="[[showCheckboxes]]"
             checkbox-name="[[checkboxName]]"
@@ -181,7 +177,6 @@ Custom property                                      | Description              
 
         <template is="dom-if" if="[[showDoubleBarChart]]">
           <double-bar-chart
-            class="scroll-margin"
             image-style-class="[[imageStyleClass]]"
             client="[[client]]"
             index-name="[[indexName]]"
@@ -366,6 +361,19 @@ Custom property                                      | Description              
         headerEntityName: {
           type: String,
           value: ''
+        },
+
+        /**
+         * (Optional)
+         *
+         * Whether to hide the scrollbar in the data.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        hideScroll: {
+          type: Boolean,
+          value: false
         },
 
         /**
@@ -676,11 +684,24 @@ Custom property                                      | Description              
        * @param {String} text
        * @param {String} headerCountsName
        * @param {String} headerEntityName
+       * @param {String} headerDataName
        * @return {String}
        * @private
        */
-      _getCountsHeader: function(text, headerCountsName, headerEntityName) {
-        return (headerCountsName ? headerCountsName + ' ' : '') + text + (headerEntityName ? ' With ' + headerEntityName : '');
+      _getCountsHeader: function(text, headerCountsName, headerEntityName, headerDataName) {
+        return (headerDataName ? headerDataName + (headerCountsName ? ' in ' : ' ') : '') + (headerCountsName ? headerCountsName + ' ' : '') + text +
+          (headerEntityName ? ' with ' + headerEntityName : '');
+      },
+
+      /**
+       * Returns the 'hide-scroll' style class if needed.
+       *
+       * @param {Boolean} hideScroll
+       * @return {String}
+       * @private
+       */
+      _shouldHideScroll: function(hideScroll) {
+        return hideScroll ? 'hide-scroll' : '';
       },
 
       /**
