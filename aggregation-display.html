@@ -130,6 +130,10 @@ Custom property                                      | Description              
       .header.hide-scroll {
         margin-right: 0;
       }
+
+      status-text {
+        margin-right: 5px;
+      }
     </style>
 
     <template is="dom-if" if="[[headerDataName]]">
@@ -157,6 +161,7 @@ Custom property                                      | Description              
     <status-text
       count="[[_barChartData.length]]"
       error="[[errorMessage]]"
+      label="[[headerDataName]]"
       loading="[[loading]]"
       empty="None">
     </status-text>
