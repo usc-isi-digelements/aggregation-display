@@ -720,7 +720,6 @@ Custom property                                      | Description              
           return;
         }
         this.set('_barChartData', []);
-        this.set('_maxOtherCount', 0);
         var limit = (this.limit > 0 ? Math.min(this._aggregationDisplayData.length, this.limit) : this._aggregationDisplayData.length);
         var barChartData = [];
         for(var i = 0; i < limit; ++i) {
