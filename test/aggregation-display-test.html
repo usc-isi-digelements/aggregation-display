@@ -53,7 +53,7 @@ limitations under the License.
         flush(done);
       });
 
-      test('properties are set correctly', function() {
+      test('properties are set as expected', function() {
         expect(element.data).to.deep.equal([{
           count: 4,
           id: 1,
@@ -83,7 +83,7 @@ limitations under the License.
         expect(element._showMore).to.be.false;
       });
 
-      test('_aggregationDisplayData is set correctly', function() {
+      test('_aggregationDisplayData is set as expected', function() {
         expect(element._aggregationDisplayData).to.be.an('Array');
         expect(element._aggregationDisplayData).to.deep.equal([{
           count: 4,
@@ -108,7 +108,7 @@ limitations under the License.
         }]);
       });
 
-      test('_barChartData is set correctly', function() {
+      test('_barChartData is set as expected', function() {
         expect(element._barChartData).to.be.an('Array');
         expect(element._barChartData).to.deep.equal([{
           count: 4,
@@ -249,7 +249,7 @@ limitations under the License.
         });
       });
 
-      test('_getCountsHeader does return correctly', function() {
+      test('_getCountsHeader does return as expected', function() {
         expect(element._getCountsHeader).to.be.a('Function');
         expect(element._getCountsHeader('Co-occurring', '', '', '')).to.equal('Co-occurring');
         expect(element._getCountsHeader('Co-occurring', 'Data', '', '')).to.equal('Data Co-occurring');
@@ -261,6 +261,11 @@ limitations under the License.
         expect(element._getCountsHeader('Co-occurring', 'Data', 'Entity', 'Extractions')).to.equal('Extractions in Data Co-occurring with Entity');
         expect(element._getCountsHeader('Not Co-occurring', '', '', '')).to.equal('Not Co-occurring');
         expect(element._getCountsHeader('Not Co-occurring', 'Data', '', '')).to.equal('Data Not Co-occurring');
+      });
+
+      test('_shouldHideScroll does return as expected', function() {
+        expect(element._shouldHideScroll(true)).to.equal('hide-scroll');
+        expect(element._shouldHideScroll(false)).to.equal('');
       });
     });
 
@@ -326,7 +331,7 @@ limitations under the License.
         flush(done);
       });
 
-      test('properties are set correctly', function() {
+      test('properties are set as expected', function() {
         expect(element.countProperty).to.equal('number');
         expect(element.iconProperty).to.equal('symbol');
         expect(element.idProperty).to.equal('uuid');
@@ -389,7 +394,7 @@ limitations under the License.
         }]);
       });
 
-      test('_aggregationDisplayData is set correctly', function() {
+      test('_aggregationDisplayData is set as expected', function() {
         expect(element._aggregationDisplayData).to.be.an('Array');
         expect(element._aggregationDisplayData).to.deep.equal([{
           count: 4,
@@ -444,7 +449,7 @@ limitations under the License.
         }]);
       });
 
-      test('_barChartData is set correctly', function() {
+      test('_barChartData is set as expected', function() {
         expect(element._barChartData).to.be.an('Array');
         expect(element._barChartData).to.deep.equal([{
           count: 4,
@@ -512,7 +517,98 @@ limitations under the License.
         expect(listener.onClick).to.be.a('Function');
       });
 
-      test('_createShowMoreListener().onClick() does change _barChartData and _showMore', function() {
+      test('_createShowMoreListener().onClick() if (count + limit < total) does change _barChartData and _showMore', function() {
+        element._createShowMoreListener().onClick();
+        expect(element._barChartData).to.be.an('Array');
+        expect(element._barChartData).to.deep.equal([{
+          count: 4,
+          icon: 'iconA',
+          id: 1,
+          link: 'linkA',
+          max: 4,
+          select: false,
+          source: 'sourceA',
+          styleClass: 'styleClassA',
+          text: 'textA'
+        }, {
+          count: 3,
+          icon: 'iconB',
+          id: 2,
+          link: 'linkB',
+          max: 4,
+          select: false,
+          source: 'sourceB',
+          styleClass: 'styleClassB',
+          text: 'textB'
+        }, {
+          count: 2,
+          icon: 'iconC',
+          id: 3,
+          link: 'linkC',
+          max: 4,
+          select: false,
+          source: 'sourceC',
+          styleClass: 'styleClassC',
+          text: 'itemC'
+        }, {
+          count: 1,
+          icon: 'iconD',
+          id: 4,
+          link: 'linkD',
+          max: 4,
+          select: false,
+          source: 'sourceD',
+          styleClass: 'styleClassD',
+          text: 'itemD'
+        }]);
+        expect(element._showMore).to.be.a('Boolean');
+        expect(element._showMore).to.be.true;
+        expect(element.$$('horizontal-bar-chart').data).to.deep.equal([{
+          count: 4,
+          icon: 'iconA',
+          id: 1,
+          link: 'linkA',
+          max: 4,
+          select: false,
+          source: 'sourceA',
+          styleClass: 'styleClassA',
+          text: 'textA'
+        }, {
+          count: 3,
+          icon: 'iconB',
+          id: 2,
+          link: 'linkB',
+          max: 4,
+          select: false,
+          source: 'sourceB',
+          styleClass: 'styleClassB',
+          text: 'textB'
+        }, {
+          count: 2,
+          icon: 'iconC',
+          id: 3,
+          link: 'linkC',
+          max: 4,
+          select: false,
+          source: 'sourceC',
+          styleClass: 'styleClassC',
+          text: 'itemC'
+        }, {
+          count: 1,
+          icon: 'iconD',
+          id: 4,
+          link: 'linkD',
+          max: 4,
+          select: false,
+          source: 'sourceD',
+          styleClass: 'styleClassD',
+          text: 'itemD'
+        }]);
+      });
+
+      test('_createShowMoreListener().onClick() if (count + limit > total) does change _barChartData and _showMore', function() {
+        element.limit = 10;
+
         element._createShowMoreListener().onClick();
         expect(element._barChartData).to.be.an('Array');
         expect(element._barChartData).to.deep.equal([{
@@ -620,6 +716,17 @@ limitations under the License.
           text: 'itemE'
         }]);
       });
+
+      test('_createShowMoreText does return expected string', function() {
+        expect(element._createShowMoreText(1, 1, 0)).to.equal('');
+        expect(element._createShowMoreText(1, 1, 1)).to.equal('');
+        expect(element._createShowMoreText(10, 1, 1)).to.equal('Show 1 More');
+        expect(element._createShowMoreText(10, 1, 5)).to.equal('Show 5 More');
+        expect(element._createShowMoreText(10, 1, 10)).to.equal('Show 9 More');
+        expect(element._createShowMoreText(10, 1, 0)).to.equal('Show All');
+        expect(element._createShowMoreText(10, 1, 10, 'Items')).to.equal('Show 9 More Items');
+        expect(element._createShowMoreText(10, 1, 0, 'Items')).to.equal('Show All Items');
+      });
     });
 
     suite('aggregation-display double-bar-chart tests', function() {
@@ -646,7 +753,7 @@ limitations under the License.
         flush(done);
       });
 
-      test('properties are set correctly', function() {
+      test('properties are set as expected', function() {
         expect(element.data).to.deep.equal([{
           count: 4,
           icon: 'iconA',

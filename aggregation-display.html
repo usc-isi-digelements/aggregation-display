@@ -45,13 +45,13 @@ Custom property                                      | Description              
 `--aggregation-display-bar-count-color`              | The color of the single or left count labels.                       | --paper-grey-900
 `--aggregation-display-bar-height`                   | The height of the single or left bars.                              | 20px
 `--aggregation-display-bar-title-color`              | The color of the single or left title labels.                       | --paper-grey-900
-`--aggregation-display-bar-title-hover-color`        | The color of the single or left title labels on hover (if a link).  | --paper-grey-600
+`--aggregation-display-bar-title-hover-color`        | The color of the single or left title labels on hover (if a link).  | --paper-indigo-900
 `--aggregation-display-max-height`                   | The max height of the bar chart.                                    | 280px
 `--aggregation-display-second-bar-color`             | The color of the right (second) bars.                               | --paper-grey-300
 `--aggregation-display-second-bar-count-color`       | The color of the right (second) count labels.                       | --paper-grey-900
 `--aggregation-display-second-bar-height`            | The height of the right (second) bars.                              | 20px
 `--aggregation-display-second-bar-title-color`       | The color of the right (second) title labels.                       | --paper-grey-900
-`--aggregation-display-second-bar-title-hover-color` | The color of the right (second) title labels on hover (if a link).  | --paper-grey-600
+`--aggregation-display-second-bar-title-hover-color` | The color of the right (second) title labels on hover (if a link).  | --paper-indigo-900
 
 @demo demo/index.html
 -->
@@ -86,7 +86,7 @@ Custom property                                      | Description              
       }
 
       .text {
-        color: var(--secondary-text-color);
+        color: var(--paper-grey-900);
         font-size: 14px;
         line-height: 20px;
         max-height: 20px;
@@ -110,7 +110,7 @@ Custom property                                      | Description              
         --horizontal-bar-chart-bar-count-color: var(--aggregation-display-bar-count-color, var(--paper-grey-900));
         --horizontal-bar-chart-bar-height: var(--aggregation-display-bar-height, 20px);
         --horizontal-bar-chart-bar-title-color: var(--aggregation-display-bar-title-color, var(--paper-grey-900));
-        --horizontal-bar-chart-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-grey-600));
+        --horizontal-bar-chart-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-indigo-900));
       }
 
       double-bar-chart {
@@ -118,12 +118,12 @@ Custom property                                      | Description              
         --double-bar-chart-left-bar-count-color: var(--aggregation-display-bar-count-color, var(--paper-grey-900));
         --double-bar-chart-left-bar-height: var(--aggregation-display-bar-height, 20px);
         --double-bar-chart-left-bar-title-color: var(--aggregation-display-bar-title-color, var(--paper-grey-900));
-        --double-bar-chart-left-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-grey-600));
+        --double-bar-chart-left-bar-title-hover-color: var(--aggregation-display-bar-title-hover-color, var(--paper-indigo-900));
         --double-bar-chart-right-bar-color: var(--aggregation-display-second-bar-color, var(--paper-grey-300));
         --double-bar-chart-right-bar-count-color: var(--aggregation-display-second-bar-count-color, var(--paper-grey-900));
         --double-bar-chart-right-bar-height: var(--aggregation-display-second-bar-height, 20px);
         --double-bar-chart-right-bar-title-color: var(--aggregation-display-second-bar-title-color, var(--paper-grey-900));
-        --double-bar-chart-right-bar-title-hover-color: var(--aggregation-display-second-bar-title-hover-color, var(--paper-grey-600));
+        --double-bar-chart-right-bar-title-hover-color: var(--aggregation-display-second-bar-title-hover-color, var(--paper-indigo-900));
       }
 
       .header {
@@ -205,7 +205,7 @@ Custom property                                      | Description              
 
     <template is="dom-if" if="[[_showMore]]">
       <div class="layout horizontal center-justified">
-        <button-action text="Show More" click-listener="[[_createShowMoreListener()]]"></button-action>
+        <button-action text="[[_createShowMoreText(_aggregationDisplayData.length, _barChartData.length, limit, headerDataName)]]" click-listener="[[_createShowMoreListener()]]"></button-action>
       </div>
     </template>
   </template>
@@ -676,14 +676,29 @@ Custom property                                      | Description              
             var barChartData = self._barChartData.map(function(item) {
               return item;
             });
+            var indexLimit = self.limit ? Math.min(barChartData.length + self.limit, self._aggregationDisplayData.length) : self._aggregationDisplayData.length;
             self.set('_barChartData', []);
-            for(var i = self.limit; i < self._aggregationDisplayData.length; ++i) {
+            for(var i = barChartData.length; i < indexLimit; ++i) {
               barChartData.push(self._aggregationDisplayData[i]);
             }
             self.set('_barChartData', barChartData);
-            self.set('_showMore', false);
+            self.set('_showMore', (barChartData.length < self._aggregationDisplayData.length));
           }
         };
+      },
+
+      /**
+       * Creates and returns the text for the Show More button.
+       *
+       * @param {Number} total
+       * @param {Number} count
+       * @param {Number} limit
+       * @param {String} title
+       * @return {String}
+       * @private
+       */
+      _createShowMoreText: function(total, count, limit, title) {
+        return count < total ? ('Show ' + (limit ? Math.min(limit, total - count) + ' More' : 'All') + (title ? ' ' + title : '')) : '';
       },
 
       /**
