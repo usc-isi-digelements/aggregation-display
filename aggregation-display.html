@@ -85,6 +85,10 @@ Custom property                                      | Description              
         margin-right: 5px;
       }
 
+      .show-more-button {
+        margin-top: 10px;
+      }
+
       .text {
         color: var(--paper-grey-900);
         font-size: 14px;
@@ -205,7 +209,11 @@ Custom property                                      | Description              
 
     <template is="dom-if" if="[[_showMore]]">
       <div class="layout horizontal center-justified">
-        <button-action text="[[_createShowMoreText(_aggregationDisplayData.length, _barChartData.length, limit, headerDataName)]]" click-listener="[[_createShowMoreListener()]]"></button-action>
+        <button-action
+          class="show-more-button"
+          text="[[_createShowMoreText(_aggregationDisplayData.length, _barChartData.length, limit, headerDataName)]]"
+          click-listener="[[_createShowMoreListener()]]">
+        </button-action>
       </div>
     </template>
   </template>
@@ -663,7 +671,7 @@ Custom property                                      | Description              
       },
 
       /**
-       * Returns a listener on clicking the Show More button to update _barChartData with all the _aggregationDisplayData.
+       * Returns a listener on clicking the Show More button to update `_barChartData` from `_aggregationDisplayData` and `limit`.
        *
        * @return {Object}
        * @private
@@ -728,7 +736,7 @@ Custom property                                      | Description              
       },
 
       /**
-       * Updates the _barChartData with the _aggregationDisplayData up to the limit.  Resets _maxOtherCount and _showMore.
+       * Updates the _barChartData with the _aggregationDisplayData up to the limit.  Resets _showMore.
        *
        * @private
        */
