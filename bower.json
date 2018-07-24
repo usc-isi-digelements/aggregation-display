@@ -1,30 +1,23 @@
 {
   "name": "aggregation-display",
-  "description": "A Polymer Element showing a bar chart with a header, loading spinner, and Show More button.",
-  "version": "2.4.6",
-  "authors": [
-    "Next Century Corporation"
-  ],
+  "description":
+    "A Polymer Element showing a bar chart with a header, loading spinner, and Show More button.",
+  "version": "2.4.7",
+  "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
-  "keywords": [
-    "web-component",
-    "polymer"
-  ],
+  "keywords": ["web-component", "polymer"],
   "main": "aggregation-display.html",
   "homepage": "https://github.com/usc-isi-digelements/aggregation-display/",
-  "ignore": [
-    "/.*",
-    "/test/"
-  ],
+  "ignore": ["/.*", "/test/"],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.2",
-    "button-action": "usc-isi-digelements/button-action#2.0.4",
-    "double-bar-chart": "usc-isi-digelements/double-bar-chart#2.6.3",
-    "horizontal-bar-chart": "usc-isi-digelements/horizontal-bar-chart#2.3.0",
+    "button-action": "usc-isi-digelements/button-action#^2.0.4",
+    "double-bar-chart": "usc-isi-digelements/double-bar-chart#^2.6.3",
+    "horizontal-bar-chart": "usc-isi-digelements/horizontal-bar-chart#^2.3.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
     "lodash-import": "usc-isi-digelements/lodash-import#~1.0.1",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
-    "status-text": "usc-isi-digelements/status-text#2.1.1"
+    "status-text": "usc-isi-digelements/status-text#^2.1.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
